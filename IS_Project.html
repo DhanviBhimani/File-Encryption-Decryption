@@ -3,14 +3,29 @@
 <head>
     <meta charset="utf-8">
     <title>File Encryption / Decryption</title>
-    <style>
-        body {
-            font-family: 'Helvetica', 'Arial', 'sans-serif';
-            color: black;
-			background-color: black;
-            font-size: 16px;
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+ <style>
+       body {
+    font-family: 'Helvetica', 'Arial', 'sans-serif';
+    color: black;
+    background-color: black;
+    font-size: 16px;
 
-        }
+
+}
+.back-img{
+	background-image: url('images.png'); 
+    background-repeat: no-repeat;
+    background-position: bottom right;
+	/* height: 30rem; */
+	overflow-x: hidden;
+	overflow-y: hidden;
+	
+
+}
+
+		
 
         a, a:link, a:visited, a:active {
             color: blue;
@@ -23,10 +38,10 @@
         }
 
         .container {
-            width: 80%;
-            margin: 0 auto;
+
+			margin: 3rem;
             /* background-color: white; */
-			border: 1px solid white;
+			border: 2px dashed #76a1cf;
             padding: 20px;
             border-radius: 5px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -53,6 +68,7 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
+
         }
 
         button:hover {
@@ -84,9 +100,13 @@
         .redspan {
             color: red;
         }
+
+
     </style>
 </head>
-<body>
+<body class="back-img">
+<div class="row">
+<div class="">
 <div class="container">
     <div class="divTable">
         <div class="divTableRow">
@@ -95,11 +115,11 @@
                 <h4 style="color: whitesmoke;">Use this web browser to encrypt and decrypt files.</h4>
             </div>
             <div class="divTableCell" style="float: right;">
-                <h1>
+                <!-- <h1> -->
                     <button id="btnRefresh" onClick="javascript:location.reload();">Refresh Page</button>
                     <button id="btnDivEncrypt" onClick="javascript:switchdiv('encrypt');">Encrypt a File</button>
                     <button id="btnDivDecrypt" onClick="javascript:switchdiv('decrypt');">Decrypt a File</button>
-                </h1>
+                <!-- </h1> -->
             </div>
         </div>
     </div>
@@ -107,7 +127,7 @@
 
 
 
-<div class="container" id="divEncryptfile" style="margin-top: 10rem;">
+<div class="container" id="divEncryptfile" style="margin-top: 5rem;">
     <h2 style="color: whitesmoke;">Encrypt a File</h2>
     <p style="color: whitesmoke;">To encrypt a file, drop the file to be encrypted into the dropzone below. The file will then be encrypted, and you'll be given an opportunity to save the encrypted file to your system.</p>
 
@@ -148,7 +168,7 @@
     <p></p>
 </div>
 
-<div class="container" id="divDecryptfile" style="margin-top: 10rem;">
+<div class="container" id="divDecryptfile" style="margin-top: 5rem;">
     <h2 style="color: whitesmoke;">Decrypt a File</h2>
     <p style="color: whitesmoke;">Decrypt a file using the password that was previously used to encrypt the file. After the file is decrypted, you'll be given an opportunity to save the decrypted file to your system.</p>
 
@@ -191,6 +211,12 @@
 
     <p></p>
 </div>
+</div>
+<!-- <div class="col-4" >
+	<img src="images.png" style=" margin-left: 0px; margin-top:15rem; height: 30rem;">
+</div> -->
+</div>
+
 </body>
 </html>
 
