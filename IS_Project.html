@@ -24,9 +24,6 @@
 	
 
 }
-
-		
-
         a, a:link, a:visited, a:active {
             color: blue;
             text-decoration: underline;
@@ -38,7 +35,6 @@
         }
 
         .container {
-
 			margin: 3rem;
             /* background-color: white; */
 			border: 2px dashed #76a1cf;
@@ -68,7 +64,6 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
-
         }
 
         button:hover {
@@ -100,8 +95,6 @@
         .redspan {
             color: red;
         }
-
-
     </style>
 </head>
 <body class="back-img">
@@ -116,7 +109,7 @@
             </div>
             <div class="divTableCell" style="float: right;">
                 <!-- <h1> -->
-                    <button id="btnRefresh" onClick="javascript:location.reload();">Refresh Page</button>
+                    /<button id="btnRefresh" onClick="javascript:location.reload();">Refresh Page</button>
                     <button id="btnDivEncrypt" onClick="javascript:switchdiv('encrypt');">Encrypt a File</button>
                     <button id="btnDivDecrypt" onClick="javascript:switchdiv('decrypt');">Decrypt a File</button>
                 <!-- </h1> -->
@@ -143,7 +136,7 @@
         <div class="divTableBody">
             <div class="divTableRow">
                 <!-- <div class="divTableCell">Password</div> -->
-                <div class="divTableCell"><span style="color: whitesmoke;">Password</span> <Br><input id="txtEncpassphrase" value="12345" type="password" size="30" style="color:whitesmoke;background-color: black; border: 2px solid grey; border-radius:3px; margin-top: 5px;" placeholder="Enter Your Password" onkeyup="javascript:encvalidate();" value=""></div>
+                <div class="divTableCell"><span style="color: whitesmoke;">Password</span> <Br><input id="txtEncpassphrase" value="" type="password" size="30" style="color:whitesmoke; background-color: black; border: 2px solid grey; border-radius:3px; margin-top: 5px; text-decoration-color: #fff;" placeholder="Enter Your Password" onkeyup="javascript:encvalidate();" value=""></div>
                 <div class="divTableCell"><br><span style="color: whitesmoke;">(minimum length eight characters, make sure it's strong!)</span></div>
             </div>
 
@@ -187,7 +180,8 @@
         <div class="divTableBody">
             <div class="divTableRow">
                 <!-- <div class="divTableCell">Password</div> -->
-                <div class="divTableCell"><span style="color: whitesmoke;">Password</span> <Br><input id="txtDecpassphrase" type="password" size="30" style="background-color: black; border: 2px solid grey; border-radius:3px; margin-top: 5px;" placeholder="Enter Your Password" onkeyup="javascript:encvalidate();" value=""></div>
+                <!-- <div class="divTableCell"><span style="color: whitesmoke;">Password</span> <Br><input id="txtDecpassphrase" type="password" size="30" style="background-color: black; border: 2px solid grey; border-radius:3px; margin-top: 5px; text-decoration-color: #fff;" placeholder="Enter Your Password" onkeyup="javascript:encvalidate();" value=""></div> -->
+					<div class="divTableCell"><span style="color: whitesmoke;">Password</span> <Br><input id="txtDecpassphrase" type="password" size="30" style="color:whitesmoke; background-color: black; border: 2px solid grey; border-radius:3px; margin-top: 5px; text-decoration-color: #fff;" placeholder="Enter Your Password" onkeyup="javascript:encvalidate();" value=""></div>
                 <!-- <div class="divTableCell"><br><span style="color: whitesmoke;">(minimum length eight characters, make sure it's strong!)</span></div> -->
             </div>
 
@@ -238,14 +232,26 @@
 }
 
 function encvalidate() {
-	txtEncpassphrase=document.getElementById('txtEncpassphrase').value;
-		console.log(txtEncpassphrase)
-			if(txtEncpassphrase.length<=8){
-				btnEncrypt=document.getElementById('btnEncrypt');
-				btnEncrypt.disabled=true
+            var txtPassword = document.getElementById('txtEncpassphrase').value;
+            if (txtPassword.length >= 8) {
+                password = txtPassword;
+                btnEncrypt = document.getElementById('btnEncrypt');
+                btnEncrypt.disabled = false;
+            } else {
+                btnEncrypt = document.getElementById('btnEncrypt');
+                btnEncrypt.disabled = true;
+            }
+        }
+
+// function encvalidate() {
+// 	txtEncpassphrase=document.getElementById('txtEncpassphrase').value;
+// 		console.log(txtEncpassphrase)
+// 			if(txtEncpassphrase.length<=8){
+// 				btnEncrypt=document.getElementById('btnEncrypt');
+// 				btnEncrypt.disabled=true
 				
-				return false;
-			}
+// 				return false;
+// 			}
 		// if(txtEncpassphrase.value.length>=8 && txtEncpassphrase.value==txtEncpassphraseretype.value) { 
 		//   spnCheckretype.classList.add("greenspan");
 		//   spnCheckretype.classList.remove("redspan");
@@ -257,8 +263,8 @@ function encvalidate() {
 		// }
 
 		// if( txtEncpassphrase.value.length>=8 && txtEncpassphrase.value==txtEncpassphraseretype.value && objFile ) { btnEncrypt.disabled=false; } else { btnEncrypt.disabled=true; }
-			return true;
-	}
+	// 		return true;
+	// }
 
 function drop_handler(ev) {
 	console.log("Drop");
@@ -343,8 +349,50 @@ function calculate( keybytes)
 
 	return paddedData;	
 }
+// async function encryptfile() {
+// 	if(encvalidate()){
+// 	var plaintextbytes = await readfile(objFile)
+// 		.catch(function(err){
+// 			console.error(err);
+// 		});
+// 	var plaintextbytes = new Uint8Array(plaintextbytes);
+
+// 		const input="kp"
+// 		const binaryData=new TextEncoder().encode(input);
+// 		var keybytes=calculate(binaryData);
+// 	var key = await window.crypto.subtle.importKey('raw', keybytes, {name: 'AES-CBC', length: 256}, false, ['encrypt']) 
+// 		.catch(function(err){
+// 			console.error(err);
+// 		});
+
+// 	var ivbytes = new Uint8Array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4, 5]);
+
+// 	var cipherbytes = await window.crypto.subtle.encrypt({name: "AES-CBC", iv: ivbytes}, key, plaintextbytes)
+// 		.catch(function(err){
+// 			console.error(err);
+// 		});
+
+// 	if (!cipherbytes) {
+// 		spnEncstatus.classList.add("redspan");
+// 		spnEncstatus.innerHTML = '<p>Error Encrypting File</p>';
+// 		return;
+// 	}
+
+// 	cipherbytes = new Uint8Array(cipherbytes);
+
+// 	var blob = new Blob([cipherbytes], {type: 'application/download'});
+// 	var blobUrl = URL.createObjectURL(blob);
+// 	aEncsavefile.href = blobUrl;
+// 	aEncsavefile.download = objFile.name ;
+
+// 	spnEncstatus.classList.add("greenspan");
+// 	spnEncstatus.innerHTML = '<p>File Encrypted.</p>';
+// 	aEncsavefile.hidden = false;
+// }
+// }
+
 async function encryptfile() {
-	if(encvalidate()){
+	  var keybytes = new TextEncoder().encode(password);
 	var plaintextbytes = await readfile(objFile)
 		.catch(function(err){
 			console.error(err);
@@ -358,7 +406,7 @@ async function encryptfile() {
 		.catch(function(err){
 			console.error(err);
 		});
-
+		
 	var ivbytes = new Uint8Array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4, 5]);
 
 	var cipherbytes = await window.crypto.subtle.encrypt({name: "AES-CBC", iv: ivbytes}, key, plaintextbytes)
@@ -377,15 +425,58 @@ async function encryptfile() {
 	var blob = new Blob([cipherbytes], {type: 'application/download'});
 	var blobUrl = URL.createObjectURL(blob);
 	aEncsavefile.href = blobUrl;
-	aEncsavefile.download = objFile.name ;
+	  aEncsavefile.download = objFile.name + ".enc";
 
 	spnEncstatus.classList.add("greenspan");
 	spnEncstatus.innerHTML = '<p>File Encrypted.</p>';
 	aEncsavefile.hidden = false;
-}
+
 }
 
+// async function decryptfile() {
+// 	var cipherbytes = await readfile(objFile)
+// 		.catch(function(err){
+// 			console.error(err);
+// 		});
+// 	var cipherbytes = new Uint8Array(cipherbytes);
+// 		const input="kp"
+// 		const binaryData=new TextEncoder().encode(input);
+
+// 	var keybytes = calculate(binaryData);
+
+// 	var key = await window.crypto.subtle.importKey('raw', keybytes, {name: 'AES-CBC', length: 256}, false, ['decrypt']) 
+// 		.catch(function(err){
+// 			console.error(err);
+// 		});
+
+// 	var ivbytes = new Uint8Array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4, 5]);
+
+// 	var plaintextbytes = await window.crypto.subtle.decrypt({name: "AES-CBC", iv: ivbytes}, key, cipherbytes)
+// 		.catch(function(err){
+// 			console.error(err);
+// 		});
+
+// 	if (!plaintextbytes) {
+// 		spnDecstatus.classList.add("redspan");
+// 		spnDecstatus.innerHTML = '<p>Error decrypting file. Password may be incorrect.</p>';
+// 		return;
+// 	}
+
+// 	plaintextbytes = new Uint8Array(plaintextbytes);
+
+// 	var blob = new Blob([plaintextbytes], {type: 'application/download'});
+// 	var blobUrl = URL.createObjectURL(blob);
+// 	aDecsavefile.href = blobUrl;
+// 	aDecsavefile.download = objFile.name ;
+
+// 	spnDecstatus.classList.add("greenspan");
+// 	spnDecstatus.innerHTML = '<p>File Decrypted.</p>';
+// 	aDecsavefile.hidden = false;
+// }
+
+
 async function decryptfile() {
+	 var keybytes = new TextEncoder().encode(password);
 	var cipherbytes = await readfile(objFile)
 		.catch(function(err){
 			console.error(err);
@@ -419,7 +510,7 @@ async function decryptfile() {
 	var blob = new Blob([plaintextbytes], {type: 'application/download'});
 	var blobUrl = URL.createObjectURL(blob);
 	aDecsavefile.href = blobUrl;
-	aDecsavefile.download = objFile.name ;
+	 aDecsavefile.download = objFile.name + ".dec";
 
 	spnDecstatus.classList.add("greenspan");
 	spnDecstatus.innerHTML = '<p>File Decrypted.</p>';
